@@ -1,3 +1,9 @@
+:root {
+    --accentMainRGB: 248, 183, 183;
+    --accentSecondRGB: 68, 37, 37;
+    --accentGradient: linear-gradient(to left bottom, rgba(var(--accentMainRGB), 0.75), rgba(var(--accentSecondRGB), 0.75));
+}
+
 html {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 16px;
@@ -13,11 +19,14 @@ main {
     margin-top: 1rem;
 }
 
+.fa {
+    font-size: 3rem;
+}
+
 section {
     padding: 1rem 0;
     margin: 5rem 0 0 0;
 }
-
 
 .question-section {
     text-align: center;
@@ -26,7 +35,9 @@ section {
     height: 50dvh;
     max-width: 1200px;
     position: relative;
-    display: grid;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
 }
 
 .answer-section {
@@ -38,28 +49,38 @@ section {
     border: 5px solid rgba(255,255,255,0.25);
 }
 
+.answer-button {
+    border-radius: 0;
+    transform-origin: right;
+}
 
 input, button {
     font-size: 2rem;
     border: none;
     padding: 1rem;
+    transition: 300ms ease-in;
 }
 
 button {
+    padding: 1.5rem 1rem;
     cursor: pointer;
     transition: 300ms ease-in;
-    background: linear-gradient(to right bottom, rgb(36, 34, 90),rgb(83, 81, 146));
-    background-size: 150% 150%;
-    background-position: top left;
+    background: linear-gradient(to left bottom, rgb(var(--accentMainRGB)), rgb(var(--accentSecondRGB)));
+    background-size: 125% 125%;
+    background-position: left bottom;
     color: #fff;
     box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+    border-radius: 10px;
+}
+
+button:hover {
+    background-position: right top;
 }
 
 button:active {
     transform: scale(95%);
     box-shadow: 0 0 5px rgba(0,0,0,0.75);
-}
-
+} /**/
 
 .headline {
     position: absolute;
@@ -84,7 +105,10 @@ button.disabled {
 
 .questions-remaining-text {
     font-size: 2rem;
-    color: red;
+    background: var(--accentGradient);
+    color: transparent;
+    background-clip: text;
+    transition: 300ms ease-in;
 }
 
 button.next-button {
@@ -106,47 +130,62 @@ button.next-button {
 }
 
 .questions-list {
-    font-size: 1rem;
+    display: block;
     position: absolute;
-    top: 25%;
-    bottom: 25%;
-    background: linear-gradient(to right bottom, rgba(36, 34, 90,0.9),rgba(83, 81, 146,0.9));
+    font-size: 1rem;
+    background: var(--accentGradient);
     backdrop-filter: blur(10px);
+    padding: 5rem 2rem;
+    border-radius: 100px;
+    color: #000;
+    border: 3px solid rgba(255,255,255,0.75);
+    height: fit-content;
+    left: 0;
+    right: 0;
+}
+
+.questions-list-items {
     display: flex;
+    flex-flow: row wrap;
     gap: 25px;
     flex-wrap: wrap;
     align-items: center;
-    padding: 3rem;
-    border-radius: 100px;
-    width: 100%;
-    color: #fff;
-    border: 3px solid rgba(255,255,255,0.75);
-    width: 100%;
-    height: fit-content;
 }
 
 .questions-list.hidden {
     display: none;
 }
 
-.questions-list div {
+.questions-list-items div {
     flex: 1 0 200px;
-    border-radius: 10px;
-    padding: 1rem;
-    box-shadow: 3px 3px 10px rgba(255,255,255,0.25);
+    padding: 2rem 1rem;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+    color: #000;
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.75) 30%, rgba(184, 184, 184, 0.25));
+    position: relative;
+    border-radius: 75px;
+}
+
+.questions-list-items div .fa {
+    background: none;
+    box-shadow: none;
+    position: absolute;
+    right: -1rem;
+    top: -2rem;
+    font-size: 2rem;
 }
 
 .question {
     align-self: center;
 }
 
-.wrong-answered {
-    background:  rgb(255, 40, 40);
+.questions-list-items .wrong-answered {
+    background: linear-gradient(to bottom right, rgba(255, 54, 54, 0.75) 30%, rgba(184, 184, 184, 0.25));
     color: #000;
 }
 
-.correct-answered {
-    background: rgb(35, 223, 35);
+.questions-list-items .correct-answered {
+    background: linear-gradient(to bottom right, rgba(165, 255, 113, 0.75) 30%, rgba(255, 255, 255, 0.25));
     color: #000;
 }
 
@@ -154,4 +193,42 @@ button.next-button {
     .question-section {
         font-size: 6rem;
     }
+}
+
+.darkmode-trigger {
+    position: fixed;
+    right: 1%;
+    top: 3%;
+    cursor: pointer;
+    transition: 300ms ease-in;
+}
+
+.darkmode-trigger:active {
+    transform: rotate(180deg);
+}
+
+body.darkmode {
+    background: black;
+    color: #fff;
+}
+
+body.darkmode button {
+    color: #000;
+    background: #fff;
+    box-shadow: 3px 3px 10px rgba(255,255,255,0.5);
+}
+
+body.darkmode input:focus {
+    background: #000;
+    color: #fff;
+}
+
+body.darkmode .questions-list {
+    background: linear-gradient(to left bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.75));
+}
+
+body.darkmode .questions-remaining-text {
+    background: linear-gradient( rgba(255,255,255,0.75), rgba(255,255,255,0.5));
+    color: transparent;
+    background-clip: text;
 }
