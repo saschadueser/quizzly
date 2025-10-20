@@ -55,7 +55,7 @@ section {
 }
 
 input, button {
-    font-size: 2rem;
+    font-size: 1rem;
     border: none;
     padding: 1rem;
     transition: 300ms ease-in;
@@ -201,6 +201,10 @@ button.next-button {
     .question-section {
         height: 50dvh;
     }
+
+    input, button {
+        font-size: 2rem;
+    }
 }
 
 .darkmode-trigger {
@@ -241,3 +245,4 @@ body.darkmode .questions-remaining-text {
     background-clip: text;
 
 }
+
