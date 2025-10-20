@@ -32,7 +32,7 @@ section {
     text-align: center;
     font-size: 2rem;
     font-weight: 700;
-    height: 40dvh;
+    height: autoh;
     max-width: 1200px;
     position: relative;
     display: flex;
@@ -245,4 +245,5 @@ body.darkmode .questions-remaining-text {
     background-clip: text;
 
 }
+
 
